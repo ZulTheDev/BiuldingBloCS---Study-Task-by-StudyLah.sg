@@ -68,20 +68,56 @@ function handleRightClick(event, hoverText) {
     });
 }
 
-// CSA Image section
+// Create a function to handle left-click behavior
+function handleLeftClick(event, hoverText) {
+    event.preventDefault();
+    this.style.backgroundColor = "blue";
+
+    const csaHoverText = document.createElement("div");
+    csaHoverText.textContent = hoverText;
+    csaHoverText.className = "hover-text";
+    this.appendChild(csaHoverText);
+
+    // Remove the hover text when clicking elsewhere
+    const removeHoverText = () => {
+        this.style.backgroundColor = "transparent";
+        const hoverTextElement = this.querySelector(".hover-text");
+        if (hoverTextElement) {
+            this.removeChild(hoverTextElement);
+        }
+        document.removeEventListener("click", removeHoverText);
+    };
+
+    // Listen for clicks outside of the element to remove hover text
+    document.addEventListener("click", removeHoverText);
+
+    // Left-click behavior
+    this.addEventListener("click", (event) => {
+        if (event.button === 0) {
+            // Open the link on left-click
+            window.open(this.getAttribute("data-link"), "_blank");
+        }
+    });
+}
+
+// Add data-link attributes to the HTML elements with the URLs
+CSA.setAttribute("data-link", "https://www.csa.gov.sg/");
+Classroom.setAttribute("data-link", "https://classroom.google.com/");
+SGPassImage.setAttribute("data-link", "https://www.singpass.gov.sg/main/");
+
+// Add left-click behavior to all images
 CSA.addEventListener("contextmenu", function (event) {
-    handleRightClick.call(this, event, "CSA is a Singapore Cybersecurity Agency. Their job is to keep Singapore and our cyberspace safe.");
+    handleLeftClick.call(this, event, "CSA is a Singapore Cybersecurity Agency. Their job is to keep Singapore and our cyberspace safe.");
 });
 
-// GCR Image section
 Classroom.addEventListener("contextmenu", function (event) {
-    handleRightClick.call(this, event, "Google Classroom is a virtual class that your teacher had assigned. He/She will be able to keep track of your work assignments assigned on Google Classroom.");
+    handleLeftClick.call(this, event, "Google Classroom is a virtual class that your teacher had assigned. He/She will be able to keep track of your work assignments assigned on Google Classroom.");
 });
 
-// SGPass Image section
 SGPassImage.addEventListener("contextmenu", function (event) {
-    handleRightClick.call(this, event, "SingPass is a virtual NRIC All-in-one tool that simplifies users' daily tasks and needs. This is designed by GovTech.");
+    handleLeftClick.call(this, event, "SingPass is a virtual NRIC All-in-one tool that simplifies users' daily tasks and needs. This is designed by GovTech.");
 });
+
 
 // Import the ioredis library
 const Redis = require('ioredis');
