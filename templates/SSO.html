@@ -7,8 +7,23 @@
     <title>Make an account</title>
     <!-- Add any CSS stylesheets or libraries you need -->
     <button type="button" id="ButHome" style="margin-left: 20px; width: auto; font-size: 20px;">Back</button>
+    <style>
+        body {
+            background-color: red;
+            margin: 0; 
+            padding: 0;
+        }
+
+        /* style goobye here lorrr */
+        #goodbye-container {
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
+    <div id="logoutmessage">
+    </div>
     <div id="app">
         <h1>Login using google and your service choice!</h1>
         <button id="login">Sign In</button>
@@ -107,9 +122,9 @@
             }
         });
 
-        // listener for the logout button
+        //logout button
         logoutButton.addEventListener("click", () => {
-            const message = document.getElementById("logout");
+            const message = document.getElementById("logoutmessage");
             goodbyeContainer.innerHTML = '<h1>Goodbye</h1>';
         });
         
