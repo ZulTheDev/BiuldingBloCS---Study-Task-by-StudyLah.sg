@@ -20,21 +20,9 @@ SLSImage.addEventListener("mouseleave", () => {
     SLSImage.title = "";
 });
 
-// Open the website 
-SLSImage.addEventListener("contextmenu", (event) => {
-    event.preventDefault();
-    window.open("https://vle.learning.moe.edu.sg/login", "_blank");
-});
-
-// When the user left-clicks, they want to log in instantly without any problems
+// Open the website in a new tab when left-clicked
 SLSImage.addEventListener("click", () => {
-    const username = prompt("Enter your username:");
-    const password = prompt("Enter your password:");
-
-    if (username !== null && password !== null) {
-        const url = `https://vle.learning.moe.edu.sg/login?username=${username}&password=${password}`;
-        window.location.href = url;
-    }
+    window.open("https://vle.learning.moe.edu.sg/login", "_blank");
 });
 
 // CSA Image section
@@ -55,6 +43,14 @@ CSA.addEventListener("contextmenu", function (event) {
             if (hoverText) {
                 CSA.removeChild(hoverText);
             }
+        }
+    });
+
+    // Open the link when left-clicked
+    CSA.addEventListener("click", (event) => {
+        // Check if the left mouse button (button code 0) was clicked
+        if (event.button === 0) {
+            window.open("https://www.csa.gov.sg/", "_blank");
         }
     });
 });
@@ -79,6 +75,14 @@ Classroom.addEventListener("contextmenu", function (event) {
             }
         }
     });
+
+    // Open the link when left-clicked
+    Classroom.addEventListener("click", (event) => {
+        // Check if the left mouse button (button code 0) was clicked
+        if (event.button === 0) {
+            window.open("https://classroom.google.com/", "_blank");
+        }
+    });
 });
 
 // SGPass Image section
@@ -101,20 +105,29 @@ SGPassImage.addEventListener("contextmenu", function (event) {
             }
         }
     });
+
+    // Open the link when left-clicked
+    SGPassImage.addEventListener("click", (event) => {
+        // Check if the left click
+        if (event.button === 0) {
+            window.open("https://www.singpass.gov.sg/main/", "_blank");
+        }
+    });
 });
+
 
 // Import the ioredis library
 const Redis = require('ioredis');
 
 // Create a connection to your Upstash Redis instance
 const redis = new Redis({
-  host: 'redis://default:8d3af28fd1f84ef29cbcca10215c79e9@finer-crane-36538.upstash.io',
-  port: '36538',
-  password: '8d3af28fd1f84ef29cbcca10215c79e9', // Your Upstash password
-  tls: {
-    rejectUnauthorized: false, // Add this line if you're using TLS/SSL
-  },
-});
+    host: 'redis://default:8d3af28fd1f84ef29cbcca10215c79e9@finer-crane-36538.upstash.io',
+    port: '36538',
+    password: '8d3af28fd1f84ef29cbcca10215c79e9', // Your Upstash password
+    tls: {
+      rejectUnauthorized: false, // Add this line if you're using TLS/SSL
+    },
+  });
 
 // Check if the user is in the database
 const userId = "USER_ID"; // Replace with the actual user ID
