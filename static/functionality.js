@@ -36,85 +36,51 @@ function handleImageClick(event, link) {
     }
 }
 
-// CSA Image section
-CSA.addEventListener("contextmenu", function (event) {
+// Create a function to handle right-click behavior
+function handleRightClick(event, hoverText) {
     event.preventDefault();
-    CSA.style.backgroundColor = "blue";
+    event.stopPropagation(); // Prevent the context menu from showing
+    this.style.backgroundColor = "blue";
 
     const csaHoverText = document.createElement("div");
-    csaHoverText.textContent = "CSA is a Singapore Cybersecurity Agency. Their job is to keep Singapore and our cyberspace safe.";
+    csaHoverText.textContent = hoverText;
     csaHoverText.className = "hover-text";
-    CSA.appendChild(csaHoverText);
+    this.appendChild(csaHoverText);
 
     // Remove the hover text when clicking elsewhere
-    document.addEventListener("click", function (clickEvent) {
-        if (clickEvent.target !== CSA) {
-            CSA.style.backgroundColor = "transparent";
-            const hoverText = document.querySelector(".hover-text");
-            if (hoverText) {
-                CSA.removeChild(hoverText);
-            }
+    const removeHoverText = () => {
+        this.style.backgroundColor = "transparent";
+        const hoverTextElement = this.querySelector(".hover-text");
+        if (hoverTextElement) {
+            this.removeChild(hoverTextElement);
+        }
+        document.removeEventListener("click", removeHoverText);
+    };
+
+    // Listen for clicks outside of the element to remove hover text
+    document.addEventListener("click", removeHoverText);
+
+    // Left-click behavior
+    this.addEventListener("click", (event) => {
+        if (event.button === 0) {
+            window.open("https://www.csa.gov.sg/", "_blank");
         }
     });
+}
 
-    // Use the handleImageClick function to control both behaviors
-    CSA.addEventListener("mousedown", (event) => {
-        handleImageClick(event, "https://www.csa.gov.sg/");
-    });
+// CSA Image section
+CSA.addEventListener("contextmenu", function (event) {
+    handleRightClick.call(this, event, "CSA is a Singapore Cybersecurity Agency. Their job is to keep Singapore and our cyberspace safe.");
 });
 
 // GCR Image section
 Classroom.addEventListener("contextmenu", function (event) {
-    event.preventDefault();
-    Classroom.style.backgroundColor = "green";
-
-    const gcrHoverText = document.createElement("div");
-    gcrHoverText.textContent = "Google Classroom is a virtual class that your teacher had assigned. He/She will be able to keep track of your work assignments assigned on Google Classroom.";
-    gcrHoverText.className = "hover-text";
-    Classroom.appendChild(gcrHoverText);
-
-    // Remove the hover text when clicking elsewhere
-    document.addEventListener("click", function (clickEvent) {
-        if (clickEvent.target !== Classroom) {
-            Classroom.style.backgroundColor = "transparent";
-            const hoverText = document.querySelector(".hover-text");
-            if (hoverText) {
-                Classroom.removeChild(hoverText);
-            }
-        }
-    });
-
-    // Use the handleImageClick function to control both behaviors
-    Classroom.addEventListener("mousedown", (event) => {
-        handleImageClick(event, "https://classroom.google.com/");
-    });
+    handleRightClick.call(this, event, "Google Classroom is a virtual class that your teacher had assigned. He/She will be able to keep track of your work assignments assigned on Google Classroom.");
 });
 
 // SGPass Image section
 SGPassImage.addEventListener("contextmenu", function (event) {
-    event.preventDefault();
-    SGPassImage.style.backgroundColor = "red";
-
-    const sgpassHoverText = document.createElement("div");
-    sgpassHoverText.textContent = "SingPass is a virtual NRIC All-in-one tool that simplifies users' daily tasks and needs. This is designed by GovTech.";
-    sgpassHoverText.className = "hover-text";
-    SGPassImage.appendChild(sgpassHoverText);
-
-    // Remove the hover text when clicking elsewhere
-    document.addEventListener("click", function (clickEvent) {
-        if (clickEvent.target !== SGPassImage) {
-            SGPassImage.style.backgroundColor = "transparent";
-            const hoverText = document.querySelector(".hover-text");
-            if (hoverText) {
-                SGPassImage.removeChild(hoverText);
-            }
-        }
-    });
-
-    // Use the handleImageClick function to control both behaviors
-    SGPassImage.addEventListener("mousedown", (event) => {
-        handleImageClick(event, "https://www.singpass.gov.sg/main/");
-    });
+    handleRightClick.call(this, event, "SingPass is a virtual NRIC All-in-one tool that simplifies users' daily tasks and needs. This is designed by GovTech.");
 });
 
 // Import the ioredis library
