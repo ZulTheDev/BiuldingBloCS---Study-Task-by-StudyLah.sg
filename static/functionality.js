@@ -6,7 +6,8 @@ const SLSImage = document.getElementById("SLS");
 const ProfileImage = document.getElementById("profile");
 const ProfileImageUpload = document.getElementById("profile-image-upload");
 const GreetUserElement = document.querySelector(".GreetUser");
-//HANDLING EVENT
+
+// HANDLING EVENT
 function openPreviewAndDisplayDescription(event, link, description) {
     if (event.button === 0) {
         // Left-click behavior (Open a preview and display description)
@@ -56,18 +57,22 @@ SLSImage.setAttribute("data-link", "https://vle.learning.moe.edu.sg/login");
 CSA.addEventListener("click", (event) => openPreviewAndDisplayDescription(event, CSA.getAttribute("data-link"), CsaDescription));
 CSA.addEventListener("contextmenu", (event) => openLinkOnRightClick(event, CSA.getAttribute("data-link")));
 addHoverShadow(CSA);
+
 // GOOGLE CLASSROOM
 Classroom.addEventListener("click", (event) => openPreviewAndDisplayDescription(event, Classroom.getAttribute("data-link"), ClassroomDescription));
 Classroom.addEventListener("contextmenu", (event) => openLinkOnRightClick(event, Classroom.getAttribute("data-link")));
 addHoverShadow(Classroom);
+
 // SINGPASS
 SGPassImage.addEventListener("click", (event) => openPreviewAndDisplayDescription(event, SGPassImage.getAttribute("data-link"), SgpassDescription));
 SGPassImage.addEventListener("contextmenu", (event) => openLinkOnRightClick(event, SGPassImage.getAttribute("data-link")));
 addHoverShadow(SGPassImage);
-/ STUDENT LEARNING SPACE
+
+// STUDENT LEARNING SPACE
 SLSImage.addEventListener("click", (event) => openPreviewAndDisplayDescription(event, SLSImage.getAttribute("data-link"), SlsDescription));
 SLSImage.addEventListener("contextmenu", (event) => openLinkOnRightClick(event, SLSImage.getAttribute("data-link")));
 addHoverShadow(SLSImage);
+
 
 // Check if the user is in the database
 const userId = "USER_ID"; // Replace with the actual user ID
