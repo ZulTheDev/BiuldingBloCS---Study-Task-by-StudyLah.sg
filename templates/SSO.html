@@ -14,7 +14,7 @@
         <button id="login">Sign In</button>
         <button id="logout" style="display: flex;">Sign Out</button>
         <div id="user-info" style="display: flex;">
-            <p>Welcome, <span id="user-displayname"></span>!</p>
+            <p>Welcome, <span id="username"></span>!</p>
         </div>
     </div>
     <h1>User Signup</h1>
@@ -109,8 +109,8 @@
 
         // listener for the logout button
         logoutButton.addEventListener("click", () => {
-        // Implement your sign-out logic here
-        // Hide user information and show login button
+            const message = document.getElementById("logout");
+            goodbyeContainer.innerHTML = '<h1>Goodbye</h1>';
         });
         
         //Button for going home to the index.html
