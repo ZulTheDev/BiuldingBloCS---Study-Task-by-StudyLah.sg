@@ -53,6 +53,14 @@ CSA.addEventListener("contextmenu", function (event) {
             window.open("https://www.csa.gov.sg/", "_blank");
         }
     });
+
+    // Allow right-click when hovering
+    CSA.addEventListener("mousedown", (event) => {
+        // Check if the right mouse button (button code 2) was clicked
+        if (event.button === 2) {
+            event.stopPropagation(); // Prevent the context menu from showing
+        }
+    });
 });
 
 // GCR Image section
@@ -81,6 +89,14 @@ Classroom.addEventListener("contextmenu", function (event) {
         // Check if the left mouse button (button code 0) was clicked
         if (event.button === 0) {
             window.open("https://classroom.google.com/", "_blank");
+        }
+    });
+
+    // Allow right-click when hovering
+    Classroom.addEventListener("mousedown", (event) => {
+        // Check if the right mouse button (button code 2) was clicked
+        if (event.button === 2) {
+            event.stopPropagation(); // Prevent the context menu from showing
         }
     });
 });
@@ -113,7 +129,16 @@ SGPassImage.addEventListener("contextmenu", function (event) {
             window.open("https://www.singpass.gov.sg/main/", "_blank");
         }
     });
+
+    // Allow right-click when hovering
+    SGPassImage.addEventListener("mousedown", (event) => {
+        // Check if the right mouse button (button code 2) was clicked
+        if (event.button === 2) {
+            event.stopPropagation(); // Prevent the context menu from showing
+        }
+    });
 });
+
 
 
 // Import the ioredis library
