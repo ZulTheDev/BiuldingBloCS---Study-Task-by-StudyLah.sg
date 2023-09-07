@@ -25,6 +25,17 @@ SLSImage.addEventListener("click", () => {
     window.open("https://vle.learning.moe.edu.sg/login", "_blank");
 });
 
+// Create a function to handle both left-click and right-click behaviors
+function handleImageClick(event, link) {
+    if (event.button === 0) {
+        // Left-click behavior
+        window.open(link, "_blank");
+    } else if (event.button === 2) {
+        // Right-click behavior
+        event.stopPropagation(); // Prevent the context menu from showing
+    }
+}
+
 // CSA Image section
 CSA.addEventListener("contextmenu", function (event) {
     event.preventDefault();
@@ -46,20 +57,9 @@ CSA.addEventListener("contextmenu", function (event) {
         }
     });
 
-    // Open the link when left-clicked
-    CSA.addEventListener("click", (event) => {
-        // Check if the left mouse button (button code 0) was clicked
-        if (event.button === 0) {
-            window.open("https://www.csa.gov.sg/", "_blank");
-        }
-    });
-
-    // Allow right-click when hovering
+    // Use the handleImageClick function to control both behaviors
     CSA.addEventListener("mousedown", (event) => {
-        // Check if the right mouse button (button code 2) was clicked
-        if (event.button === 2) {
-            event.stopPropagation(); // Prevent the context menu from showing
-        }
+        handleImageClick(event, "https://www.csa.gov.sg/");
     });
 });
 
@@ -84,20 +84,9 @@ Classroom.addEventListener("contextmenu", function (event) {
         }
     });
 
-    // Open the link when left-clicked
-    Classroom.addEventListener("click", (event) => {
-        // Check if the left mouse button (button code 0) was clicked
-        if (event.button === 0) {
-            window.open("https://classroom.google.com/", "_blank");
-        }
-    });
-
-    // Allow right-click when hovering
+    // Use the handleImageClick function to control both behaviors
     Classroom.addEventListener("mousedown", (event) => {
-        // Check if the right mouse button (button code 2) was clicked
-        if (event.button === 2) {
-            event.stopPropagation(); // Prevent the context menu from showing
-        }
+        handleImageClick(event, "https://classroom.google.com/");
     });
 });
 
@@ -122,24 +111,11 @@ SGPassImage.addEventListener("contextmenu", function (event) {
         }
     });
 
-    // Open the link when left-clicked
-    SGPassImage.addEventListener("click", (event) => {
-        // Check if the left click
-        if (event.button === 0) {
-            window.open("https://www.singpass.gov.sg/main/", "_blank");
-        }
-    });
-
-    // Allow right-click when hovering
+    // Use the handleImageClick function to control both behaviors
     SGPassImage.addEventListener("mousedown", (event) => {
-        // Check if the right mouse button (button code 2) was clicked
-        if (event.button === 2) {
-            event.stopPropagation(); // Prevent the context menu from showing
-        }
+        handleImageClick(event, "https://www.singpass.gov.sg/main/");
     });
 });
-
-
 
 // Import the ioredis library
 const Redis = require('ioredis');
