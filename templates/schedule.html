@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Schedule - Dashboard</title>
+    <link rel="stylesheet" href="styling.css">
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
+</head>
+<body>
+    <button type="button" id="ButHome">Back</button>
+    <br>
+    <table class="schedule-table">
+        <thead>
+            {% for row in schedule_data %}
+                <tr>
+                    {% for cell in row %}
+                        <th>{{ cell }}</th>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </thead>
+        <!-- Add the table body here if needed -->
+    </table>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Import">
+    </form>
+    <a href="/download">Download as Spreadsheet</a>
+
+    <script>
+        const button = document.getElementById("ButHome");
+        //Button to go home function here
+        button.addEventListener("mouseenter", function() {
+            button.style.backgroundColor = "#6E1E9B"; // Darker color on hover
+        });
+
+        button.addEventListener("mouseleave", function() {
+            button.style.backgroundColor = "#8A2BE2"; // original color
+        });
+
+        // go back to home
+        button.addEventListener("click", function() {
+            window.location.href = "../index.html";
+        });
+    </script>
+
+    <script>
+        // Sample data for the schedule table
+        let scheduleData = [
+            ["Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            ["8:00 AM - 9:00 AM", "", "", "", "", "", "", ""],
+            ["9:00 AM - 10:00 AM", "", "", "", "", "", "", ""],
+            // Add more rows as needed
+        ];
+
+        // Function to update the schedule table with the current data
+        function updateScheduleTable() {
+            const scheduleTable = document.querySelector('.schedule-table');
+
+            // Clear existing rows
+            while (scheduleTable.rows.length > 0) {
+                scheduleTable.deleteRow(0);
+            }
+
+            // Add header row
+            const headerRow = scheduleTable.insertRow(0);
+            for (const cell of scheduleData[0]) {
+                const th = document.createElement('th');
+                th.textContent = cell;
+                headerRow.appendChild(th);
+            }
+
+            // Add data rows
+            for (let i = 1; i < scheduleData.length; i++) {
+                const dataRow = scheduleTable.insertRow(i);
+                for (const cell of scheduleData[i]) {
+                    const td = document.createElement('td');
+                    td.textContent = cell;
+                    dataRow.appendChild(td);
+                }
+            }
+        }
+
+        // Call the function to initially populate the table
+        updateScheduleTable();
+
+        // Function to customize time for a specific cell
+        function customizeTime(row, column, customTime) {
+            if (row >= 1 && row < scheduleData.length && column >= 1 && column < scheduleData[0].length) {
+                scheduleData[row][column] = customTime;
+                updateScheduleTable();
+            }
+        }
+
+        // Example: Customize the time for a specific cell (row 2, column 2)
+        // customizeTime(2, 2, "10:00 AM - 11:00 AM");
+
+        // Function to add a new task to the schedule
+        function addTask(row, column, taskName) {
+            if (row >= 1 && row < scheduleData.length && column >= 1 && column < scheduleData[0].length) {
+                scheduleData[row][column] = taskName;
+                updateScheduleTable();
+            }
+        }
+
+        // Example: Add a new task to a specific cell (row 2, column 3)
+        // addTask(2, 3, "Task 1");
+    </script>
+</body>
+</html>

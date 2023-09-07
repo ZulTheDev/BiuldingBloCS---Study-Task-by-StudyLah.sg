@@ -1,0 +1,115 @@
+#Home {
+    background-color: whitesmoke;
+}
+
+#TopNav {
+    background-color: #8A2BE2;
+}
+
+#TopNav button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.homepage {
+    text-align: center;
+}
+
+.side-bar {
+    position: fixed;
+    left: 50px;
+    top: 0;
+    bottom: 0;
+    padding-top: 50px;
+    font-family: cursive; 
+    font-weight: bold;
+}
+
+.side-bar a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.Main {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 10%;
+    padding-top: -30%;
+    text-align: center;
+}
+
+#profile {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    margin-bottom: 5px;
+    margin-top: 40px;
+}
+
+.GreetUser {
+    font-size: 80px;
+    font-family: 'Bebas Neue', sans-serif;
+    padding-top: -25%;
+}
+
+.Quote {
+    font-size: 25px;
+    font-family: 'Comic Sans MS', sans-serif;
+    font-weight: bold;
+}
+
+img {
+    border-radius: 50%;
+    border-style: solid;
+    border-color: #8A2BE2;
+    height: 128px;
+    width: 128px;
+    margin: 10px;
+}
+
+#options {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+#options img {
+    border-radius: 50%;
+    border-style: solid;
+    border-color: #8A2BE2;
+    height: 128px;
+    width: 128px;
+    margin: 0 15px; /* Added margin to space the images */
+}
+
+
+/* Button and obj*/
+
+/*Animation for the schedule back home*/
+#ButHome {
+    background-color: #8A2BE2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background-color 0.5s; /* Adding a smooth transition for color change */
+    font-family: "Comic Sans MS", sans-serif;
+    font-weight: bold; /* Making the text bold */
+    padding-left: 30%;
+    width: auto;
+}
+#ButHome:hover {
+    background-color: #6E1E9B;
+}

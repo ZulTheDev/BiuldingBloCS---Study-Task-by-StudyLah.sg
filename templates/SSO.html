@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Linking this used variable or function -->
+    <link rel="stylesheet" href="../styling.css">
+    <meta charset="utf-8">
+    <title>Make an account</title>
+    <!-- Add any CSS stylesheets or libraries you need -->
+    <button type="button" id="ButHome" style="margin-left: 20px; width: auto; font-size: 20px;">Back</button>
+</head>
+<body>
+    <div id="app">
+        <h1>Login using google and your service choice!</h1>
+        <button id="login">Sign In</button>
+        <button id="logout" style="display: flex;">Sign Out</button>
+        <div id="user-info" style="display: flex;">
+            <p>Welcome, <span id="user-displayname"></span>!</p>
+        </div>
+    </div>
+    <h1>User Signup</h1>
+<form id="signup-form">
+    <input type="text" id="username" placeholder="Enter username" required>
+    <button type="submit">Sign Up</button>
+</form>
+
+<h1>User Logout</h1>
+<form id="logout-form">
+    <input type="text" id="logout-username" placeholder="Enter username" required>
+    <button type="submit">Logout</button>
+</form>
+
+<script>
+    const signupForm = document.getElementById('signup-form');
+    const logoutForm = document.getElementById('logout-form');
+
+    signupForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+
+    const response = await fetch('/signup', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username }),
+    });
+
+    const data = await response.json();
+    alert(data.message);
+    });
+
+    logoutForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('logout-username').value;
+
+    const response = await fetch('/logout', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username }),
+    });
+
+    const data = await response.json();
+    alert(data.message);
+    });
+</script>
+    <script src="static/functionality.js"></script>
+    <!-- Include Firebase SDK and your Firebase configuration -->
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"></script>
+    <script>
+        //Variable
+        const app = document.getElementById("app");
+        const loginButton = document.getElementById("login");
+        const logoutButton = document.getElementById("logout");
+        const userInfo = document.getElementById("user-info");
+        const userDisplayName = document.getElementById("user-displayname");
+        const firebaseConfig = {
+            apiKey: "AIzaSyCB9bVNmFyXg9ArSnpCgVS1XC1UwUXstVw",
+            authDomain: "studenttask-project.firebaseapp.com",
+            projectId: "studenttask-project",
+            storageBucket: "studenttask-project.appspot.com",
+            messagingSenderId: "876903303493",
+            appId: "1:876903303493:web:8e13c2966a497dbb3fd62c"
+        };
+
+        // listener for login button
+        loginButton.addEventListener("click", () => {
+        // Get user cridential
+            const email = prompt("Enter your email:");
+            const password = prompt("Enter your password:");
+
+            if (email && password) {
+            // Sign using email and pass oni.
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                // YAY! BABE LOGIN!
+                const user = userCredential.user;
+                showUserInfo(user);
+            })
+            .catch((error) => {
+                // Cannot login, must have something problem!
+                alert("Sign-in failed. Check your email and password.");
+            });
+            }
+        });
+
+        // listener for the logout button
+        logoutButton.addEventListener("click", () => {
+        // Implement your sign-out logic here
+        // Hide user information and show login button
+        });
+        
+        //Button for going home to the index.html
+        const button = document.getElementById("ButHome");
+        //Button to go home function here
+        button.addEventListener("mouseenter", function() {
+            button.style.backgroundColor = "#6E1E9B"; // Darker color on hover
+        });
+
+        button.addEventListener("mouseleave", function() {
+            button.style.backgroundColor = "#8A2BE2"; // original color
+        });
+
+        // go back to home
+        button.addEventListener("click", function() {
+            window.location.href = "../index.html";
+        });
+        </script>
+        <script src="/static/Node.js"></script>
+    </body>
+</html>
