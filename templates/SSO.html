@@ -19,6 +19,9 @@
             text-align: center;
             padding: 20px;
         }
+        #logoutmessage {
+            visibility: hidden;
+        }
     </style>
 </head>
 <body>
@@ -124,8 +127,9 @@
 
         //logout button
         logoutButton.addEventListener("click", () => {
-            const message = document.getElementById("logoutmessage");
-            goodbyeContainer.innerHTML = '<h1>Goodbye</h1>';
+            const Message = document.getElementById("logoutmessage");
+            Message.style.visibility = "visible";
+            Message.innerHTML = '<h1>Goodbye</h1>';
         });
         
         //Button for going home to the index.html
