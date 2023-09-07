@@ -8,10 +8,8 @@ const ProfileImageUpload = document.getElementById("profile-image-upload");
 const GreetUserElement = document.querySelector(".GreetUser");
 
 // Hoover for SLS
-SLSImage.addEventListener("mouseenter", () => {
-    SLSImage.style.backgroundColor = "lightblue";
-    SLSImage.style.boxShadow = "0 0 10px rgba(138, 43, 226, 0.5)";
-    SLSImage.title = "Account";
+SLSImage.addEventListener("mousedown", function (event) {
+    handleImageClick(event, "https://vle.learning.moe.edu.sg/login", "SLS is one of the way that your teacher will assign you work and revisions.");
 });
 
 SLSImage.addEventListener("mouseleave", () => {
@@ -20,103 +18,42 @@ SLSImage.addEventListener("mouseleave", () => {
     SLSImage.title = "";
 });
 
-// Open the website in a new tab when left-clicked
-SLSImage.addEventListener("click", () => {
-    window.open("https://vle.learning.moe.edu.sg/login", "_blank");
-});
-
-// Create a function to handle both left-click and right-click behaviors
-function handleImageClick(event, link) {
+// Function to handle both left-click and right-click behaviors
+function handleImageClick(event, link, previewText) {
     if (event.button === 0) {
-        // Left-click behavior
-        window.open(link, "_blank");
+        // Left-click behavior (preview)
+        event.preventDefault(); // Prevent the default action (opening a new tab)
+        event.stopPropagation(); // Prevent bubbling to parent elements
+
+        // Show a preview with the provided text
+        showPreview(previewText);
     } else if (event.button === 2) {
-        // Right-click behavior
-        event.stopPropagation(); // Prevent the context menu from showing
+        // Right-click behavior (redirect)
+        window.open(link, "_blank");
     }
 }
 
-// Create a function to handle right-click behavior
-function handleRightClick(event, hoverText) {
-    event.preventDefault();
-    event.stopPropagation(); // Prevent the context menu from showing
-    this.style.backgroundColor = "blue";
-
-    const csaHoverText = document.createElement("div");
-    csaHoverText.textContent = hoverText;
-    csaHoverText.className = "hover-text";
-    this.appendChild(csaHoverText);
-
-    // Remove the hover text when clicking elsewhere
-    const removeHoverText = () => {
-        this.style.backgroundColor = "transparent";
-        const hoverTextElement = this.querySelector(".hover-text");
-        if (hoverTextElement) {
-            this.removeChild(hoverTextElement);
-        }
-        document.removeEventListener("click", removeHoverText);
-    };
-
-    // Listen for clicks outside of the element to remove hover text
-    document.addEventListener("click", removeHoverText);
-
-    // Left-click behavior
-    this.addEventListener("click", (event) => {
-        if (event.button === 0) {
-            window.open("https://www.csa.gov.sg/", "_blank");
-        }
-    });
+// Function to show a preview with the given text
+function showPreview(previewText) {
+    // Modify or display the preview as desired
+    // For example, you can show a tooltip or a popup with the previewText
+    // In this example, we'll simply log it to the console
+    console.log(previewText);
 }
 
-// Create a function to handle left-click behavior
-function handleLeftClick(event, hoverText) {
-    event.preventDefault();
-    this.style.backgroundColor = "blue";
-
-    const csaHoverText = document.createElement("div");
-    csaHoverText.textContent = hoverText;
-    csaHoverText.className = "hover-text";
-    this.appendChild(csaHoverText);
-
-    // Remove the hover text when clicking elsewhere
-    const removeHoverText = () => {
-        this.style.backgroundColor = "transparent";
-        const hoverTextElement = this.querySelector(".hover-text");
-        if (hoverTextElement) {
-            this.removeChild(hoverTextElement);
-        }
-        document.removeEventListener("click", removeHoverText);
-    };
-
-    // Listen for clicks outside of the element to remove hover text
-    document.addEventListener("click", removeHoverText);
-
-    // Left-click behavior
-    this.addEventListener("click", (event) => {
-        if (event.button === 0) {
-            // Open the link on left-click
-            window.open(this.getAttribute("data-link"), "_blank");
-        }
-    });
-}
-
-// Add data-link attributes to the HTML elements with the URLs
-CSA.setAttribute("data-link", "https://www.csa.gov.sg/");
-Classroom.setAttribute("data-link", "https://classroom.google.com/");
-SGPassImage.setAttribute("data-link", "https://www.singpass.gov.sg/main/");
-
-// Add left-click behavior to all images
-CSA.addEventListener("contextmenu", function (event) {
-    handleLeftClick.call(this, event, "CSA is a Singapore Cybersecurity Agency. Their job is to keep Singapore and our cyberspace safe.");
+// Update the event listeners for the images
+CSA.addEventListener("mousedown", function (event) {
+    handleImageClick(event, "https://www.csa.gov.sg/", "CSA is a Singapore Cybersecurity Agency. Their job is to keep Singapore and our cyberspace safe.");
 });
 
-Classroom.addEventListener("contextmenu", function (event) {
-    handleLeftClick.call(this, event, "Google Classroom is a virtual class that your teacher had assigned. He/She will be able to keep track of your work assignments assigned on Google Classroom.");
+Classroom.addEventListener("mousedown", function (event) {
+    handleImageClick(event, "https://classroom.google.com/", "Google Classroom is a virtual class that your teacher had assigned. He/She will be able to keep track of your work assignments assigned on Google Classroom.");
 });
 
-SGPassImage.addEventListener("contextmenu", function (event) {
-    handleLeftClick.call(this, event, "SingPass is a virtual NRIC All-in-one tool that simplifies users' daily tasks and needs. This is designed by GovTech.");
+SGPassImage.addEventListener("mousedown", function (event) {
+    handleImageClick(event, "https://www.singpass.gov.sg/main/", "SingPass is a virtual NRIC All-in-one tool that simplifies users' daily tasks and needs. This is designed by GovTech.");
 });
+
 
 
 // Import the ioredis library
