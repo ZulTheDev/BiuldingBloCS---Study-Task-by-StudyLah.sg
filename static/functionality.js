@@ -6,68 +6,68 @@ const SLSImage = document.getElementById("SLS");
 const ProfileImage = document.getElementById("profile");
 const ProfileImageUpload = document.getElementById("profile-image-upload");
 const GreetUserElement = document.querySelector(".GreetUser");
-
-// Hoover for SLS
-SLSImage.addEventListener("mousedown", function (event) {
-    handleImageClick(event, "https://vle.learning.moe.edu.sg/login", "SLS is one of the way that your teacher will assign you work and revisions.");
-});
-
-SLSImage.addEventListener("mouseleave", () => {
-    SLSImage.style.backgroundColor = "transparent";
-    SLSImage.style.boxShadow = "none";
-    SLSImage.title = "";
-});
-
-// Function to handle both left-click and right-click behaviors
-function handleImageClick(event, link, previewText) {
+//HANDLING EVENT
+function openPreviewAndDisplayDescription(event, link, description) {
     if (event.button === 0) {
-        // Left-click behavior (preview)
-        event.preventDefault(); // Prevent the default action (opening a new tab)
-        event.stopPropagation(); // Prevent bubbling to parent elements
+        // Left-click behavior (Open a preview and display description)
+        event.preventDefault();
+        
+        // You can customize how you want to display the description, for example, in an alert
+        alert(description);
 
-        // Show a preview with the provided text
-        showPreview(previewText);
-    } else if (event.button === 2) {
-        // Right-click behavior (redirect)
+        // Open the link in a new tab
         window.open(link, "_blank");
     }
 }
 
-// Function to show a preview with the given text
-function showPreview(previewText) {
-    // Modify or display the preview as desired
-    // For example, you can show a tooltip or a popup with the previewText
-    // In this example, we'll simply log it to the console
-    console.log(previewText);
+function openLinkOnRightClick(event, link) {
+    if (event.button === 2) {
+        // Right-click behavior (Open the link)
+        event.preventDefault();
+        window.open(link, "_blank");
+    }
 }
 
-// Update the event listeners for the images
-CSA.addEventListener("mousedown", function (event) {
-    handleImageClick(event, "https://www.csa.gov.sg/", "CSA is a Singapore Cybersecurity Agency. Their job is to keep Singapore and our cyberspace safe.");
-});
+function addHoverShadow(element) {
+    element.addEventListener("mouseenter", () => {
+        element.style.boxShadow = "0 0 10px rgba(138, 43, 226, 0.5)";
+        element.style.transition = "box-shadow 0.3s ease";
+    });
 
-Classroom.addEventListener("mousedown", function (event) {
-    handleImageClick(event, "https://classroom.google.com/", "Google Classroom is a virtual class that your teacher had assigned. He/She will be able to keep track of your work assignments assigned on Google Classroom.");
-});
+    element.addEventListener("mouseleave", () => {
+        element.style.boxShadow = "none";
+    });
+}
 
-SGPassImage.addEventListener("mousedown", function (event) {
-    handleImageClick(event, "https://www.singpass.gov.sg/main/", "SingPass is a virtual NRIC All-in-one tool that simplifies users' daily tasks and needs. This is designed by GovTech.");
-});
+// DESCRIPTION
+const CsaDescription = "CSA is a Singapore Cybersecurity Agency. Their job is to keep Singapore and our cyberspace safe.";
+const ClassroomDescription = "Google Classroom is a virtual class that your teacher had assigned. He/She will be able to keep track of your work assignments assigned on Google Classroom.";
+const SgpassDescription = "SingPass is a virtual NRIC All-in-one tool that simplifies users' daily tasks and needs. This is designed by GovTech.";
+const SlsDescription = "SLS is the Singapore Learning Space, where students can access online learning resources and assignments.";
 
+// LINKS
+CSA.setAttribute("data-link", "https://www.csa.gov.sg/");
+Classroom.setAttribute("data-link", "https://classroom.google.com/");
+SGPassImage.setAttribute("data-link", "https://www.singpass.gov.sg/main/");
+SLSImage.setAttribute("data-link", "https://vle.learning.moe.edu.sg/login");
 
-
-// Import the ioredis library
-const Redis = require('ioredis');
-
-// Create a connection to your Upstash Redis instance
-const redis = new Redis({
-    host: 'redis://default:8d3af28fd1f84ef29cbcca10215c79e9@finer-crane-36538.upstash.io',
-    port: '36538',
-    password: '8d3af28fd1f84ef29cbcca10215c79e9', // Your Upstash password
-    tls: {
-      rejectUnauthorized: false, // Add this line if you're using TLS/SSL
-    },
-  });
+// Left click and Right click
+// CSA
+CSA.addEventListener("click", (event) => openPreviewAndDisplayDescription(event, CSA.getAttribute("data-link"), CsaDescription));
+CSA.addEventListener("contextmenu", (event) => openLinkOnRightClick(event, CSA.getAttribute("data-link")));
+addHoverShadow(CSA);
+// GOOGLE CLASSROOM
+Classroom.addEventListener("click", (event) => openPreviewAndDisplayDescription(event, Classroom.getAttribute("data-link"), ClassroomDescription));
+Classroom.addEventListener("contextmenu", (event) => openLinkOnRightClick(event, Classroom.getAttribute("data-link")));
+addHoverShadow(Classroom);
+// SINGPASS
+SGPassImage.addEventListener("click", (event) => openPreviewAndDisplayDescription(event, SGPassImage.getAttribute("data-link"), SgpassDescription));
+SGPassImage.addEventListener("contextmenu", (event) => openLinkOnRightClick(event, SGPassImage.getAttribute("data-link")));
+addHoverShadow(SGPassImage);
+/ STUDENT LEARNING SPACE
+SLSImage.addEventListener("click", (event) => openPreviewAndDisplayDescription(event, SLSImage.getAttribute("data-link"), SlsDescription));
+SLSImage.addEventListener("contextmenu", (event) => openLinkOnRightClick(event, SLSImage.getAttribute("data-link")));
+addHoverShadow(SLSImage);
 
 // Check if the user is in the database
 const userId = "USER_ID"; // Replace with the actual user ID
