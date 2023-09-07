@@ -7,23 +7,11 @@
     <title>Make an account</title>
     <!-- Add any CSS stylesheets or libraries you need -->
     <button type="button" id="ButHome" style="margin-left: 20px; width: auto; font-size: 20px;">Back</button>
-    <style> /*This one just added.*/
-        /* style goobye here lorrr */
-        #goodbye-container {
-            text-align: center;
-            padding: 20px;
-        }
-        #logoutmessage {
-            margin: 0; 
-            padding: 0;
-            background-color: red;
-            visibility: hidden;
-        }
-    </style>
 </head>
 <body>
     <div id="goodbye-container">
     </div>
+
     <div id="app">
         <h1>Login using google and your service choice!</h1>
         <button id="login">Sign In</button>
@@ -121,12 +109,11 @@
             });
             }
         });
-
-        // Logout button
+        //Logout
         logoutButton.addEventListener("click", () => {
-            const Message = document.getElementById("goodbye-container"); // Updated ID here
+            const Message = document.getElementById("goodbye-container");
             Message.style.visibility = "visible";
-            Message.innerHTML = '<h1>Goodbye</h1>'; // Updated ID here
+            Message.innerHTML = '<h1>Goodbye! WE MISS U!</h1>';
         });
         
         //Button for going home to the index.html
@@ -137,7 +124,7 @@
         });
 
         button.addEventListener("mouseleave", function() {
-            .style.backgroundColor = "#8A2BE2"; // original color
+            button.style.backgroundColor = "#8A2BE2"; // original color
         });
 
         // go back to home
